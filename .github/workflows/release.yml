@@ -33,6 +33,10 @@ jobs:
         working-directory: plugin
         run: bun install --frozen-lockfile
 
+      - name: Check code quality
+        working-directory: plugin
+        run: bun run check
+
       - name: Build plugin
         working-directory: plugin
         run: bun run build
