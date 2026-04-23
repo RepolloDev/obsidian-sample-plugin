@@ -25,6 +25,7 @@
         "dev": "bun run utils/build-plugin.ts --dev"
     },
     "devDependencies": {
+        "@types/bun": "^1.3.13",
         "@types/node": "^25.5.2",
         "@typescript-eslint/parser": "^8.58.0",
         "esbuild": "^0.28.0",
