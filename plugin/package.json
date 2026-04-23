@@ -16,7 +16,7 @@
     },
     "scripts": {
         "clean": "bun run utils/clean-dev.ts",
-        "version": "bun run utils/version-tracker.ts && git add versions.json manifest.json",
+        "version": "bun run utils/version-tracker.ts && git add utils/versions.json",
         "typecheck": "tsc --noEmit --skipLibCheck",
         "format": "prettier --write .",
         "lint": "eslint src/",

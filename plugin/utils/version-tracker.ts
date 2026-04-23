@@ -26,3 +26,8 @@ export async function syncAppVersions(pluginVersion: string) {
 
     return versions;
 }
+
+if (import.meta.main) {
+    const versions = await syncAppVersions(config.version);
+    console.log('Current version mappings:', versions);
+}
