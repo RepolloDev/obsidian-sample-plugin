@@ -22,13 +22,14 @@
         "check": "bun run typecheck && bun run format && bun run lint",
         "version": "bun run config/commands/version.ts",
         "version:dev": "bun run config/commands/version.ts --dev",
-        "metadata": "bun run config/commands/metadata.ts",
-        "metadata:dev": "bun run config/commands/metadata.ts --dev",
+        "manifest": "bun run config/commands/metadata.ts",
+        "manifest:dev": "bun run config/commands/metadata.ts --dev",
+        "metadata": "bun run manifest:dev && bun run version:dev",
         "artifact": "bun run config/commands/artifact.ts",
         "artifact:dev": "bun run config/commands/artifact.ts --dev",
         "clean": "bun run config/commands/clean.ts --dev",
-        "build": "bun run version && bun run metadata && bun run artifact",
-        "dev": "bun run clean && bun run version:dev && bun run metadata:dev && bun run artifact:dev"
+        "build": "bun run version && bun run manifest && bun run artifact && bun run metadata",
+        "dev": "bun run clean && bun run version:dev && bun run manifest:dev && bun run artifact:dev"
     },
     "devDependencies": {
         "@types/bun": "^1.3.13",
