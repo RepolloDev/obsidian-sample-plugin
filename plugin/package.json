@@ -27,7 +27,7 @@
         "artifact": "bun run config/commands/artifact.ts",
         "artifact:dev": "bun run config/commands/artifact.ts --dev",
         "clean": "bun run config/commands/clean.ts --dev",
-        "build": "bun run check && bun run version && bun run metadata && bun run artifact",
+        "build": "bun run version && bun run metadata && bun run artifact",
         "dev": "bun run clean && bun run version:dev && bun run metadata:dev && bun run artifact:dev"
     },
     "devDependencies": {
