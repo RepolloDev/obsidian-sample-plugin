@@ -31,7 +31,7 @@ jobs:
         working-directory: plugin
         run: |
           bun run version:dev
-          bun run metadata:dev
+          bun run manifest:dev
 
       - name: Commit metadata correction to main
         run: |
