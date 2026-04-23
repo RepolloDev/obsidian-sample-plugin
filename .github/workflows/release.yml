@@ -39,19 +39,28 @@ jobs:
 
       - name: Prepare release assets
         run: |
-          mkdir -p release-assets
+          mkdir -p release-assets/.github
+          mkdir -p release-package/.github
+
           cp dist/main.js release-assets/main.js
           cp dist/manifest.json release-assets/manifest.json
           cp dist/versions.json release-assets/versions.json
           cp README.md release-assets/README.md
+          cp -R .github/assets release-assets/.github/assets
+
+          cp -R dist/. release-package/
+          cp README.md release-package/README.md
+          cp -R .github/assets release-package/.github/assets
+          tar -czf release-assets/plugin-build-${GITHUB_REF_NAME}.tar.gz -C release-package .
 
       - name: Publish build output to main branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p /tmp/release-dist
+          mkdir -p /tmp/release-dist/.github
           cp -R dist/. /tmp/release-dist/
           cp README.md /tmp/release-dist/README.md
+          cp -R .github/assets /tmp/release-dist/.github/assets
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -59,7 +68,6 @@ jobs:
           git checkout --orphan main-build
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -R /tmp/release-dist/. .
-          touch .nojekyll
 
           git add -A
           git commit -m "build: release ${GITHUB_REF_NAME}"
@@ -75,4 +83,4 @@ jobs:
             release-assets/main.js
             release-assets/manifest.json
             release-assets/versions.json
-            release-assets/README.md
+            release-assets/plugin-build-${{ github.ref_name }}.tar.gz
