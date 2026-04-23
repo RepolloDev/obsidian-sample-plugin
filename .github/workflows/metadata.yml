@@ -48,6 +48,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          VERSION=$(jq -r '.version' manifest.json)
+          if [[ -z "$VERSION" || "$VERSION" == "null" ]]; then
+            echo "Could not read version from manifest.json"
+            exit 1
+          fi
+
           git add manifest.json versions.json
-          git commit -m "chore: sync metadata files [skip ci]"
+          git commit -m "chore: sync metadata files v${VERSION} [skip ci]"
           git push origin HEAD:main
