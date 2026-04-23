@@ -3,7 +3,7 @@ import { defineConfig } from '@config/utils/manifest';
 export default defineConfig({
     id: 'obsidian-plugin',
     name: 'Obsidian Plugin',
-    version: '1.0.5',
+    version: '1.0.6',
     description: 'A plugin for Obsidian',
     author: 'RepolloDev',
     authorUrl: 'https://github.com/RepolloDev',
