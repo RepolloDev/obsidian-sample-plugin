@@ -1,4 +1,4 @@
-import { defineConfig } from '@plugin-utils/manifest';
+import { defineConfig } from '@config/utils/manifest';
 
 export default defineConfig({
     id: 'obsidian-plugin',

@@ -10,7 +10,8 @@
         "types": ["node", "bun-types"],
         "paths": {
             "@/*": ["./src/*"],
-            "@plugin-utils/*": ["./utils/*"]
+            "@plugin-utils/*": ["./utils/*"],
+            "@config/*": ["./config/*"]
         },
 
         // Source maps / debugging
@@ -50,5 +51,11 @@
         "noUnusedParameters": false,
         "noPropertyAccessFromIndexSignature": false
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "*.mts", "utils/**/*.ts"]
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "*.mts",
+        "utils/**/*.ts",
+        "config/**/*.ts"
+    ]
 }

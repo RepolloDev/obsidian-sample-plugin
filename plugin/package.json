@@ -12,17 +12,23 @@
     "type": "module",
     "module": "src/main.ts",
     "dependencies": {
-        "obsidian": "latest"
+        "obsidian": "latest",
+        "zod": "^4.3.6"
     },
     "scripts": {
-        "clean": "bun run utils/clean-dev.ts",
-        "version": "bun run utils/version-tracker.ts && git add utils/versions.json",
         "typecheck": "tsc --noEmit --skipLibCheck",
-        "format": "prettier --write .",
-        "lint": "eslint src/",
+        "format": "prettier --config config/prettier.config.ts --write .",
+        "lint": "eslint -c config/eslint.config.ts src/",
         "check": "bun run typecheck && bun run format && bun run lint",
-        "build": "bun run check && bun run utils/build-plugin.ts",
-        "dev": "bun run utils/build-plugin.ts --dev"
+        "version": "bun run config/commands/version.ts",
+        "version:dev": "bun run config/commands/version.ts --dev",
+        "metadata": "bun run config/commands/metadata.ts",
+        "metadata:dev": "bun run config/commands/metadata.ts --dev",
+        "artifact": "bun run config/commands/artifact.ts",
+        "artifact:dev": "bun run config/commands/artifact.ts --dev",
+        "clean": "bun run config/commands/clean.ts --dev",
+        "build": "bun run check && bun run version && bun run metadata && bun run artifact",
+        "dev": "bun run clean && bun run version:dev && bun run metadata:dev && bun run artifact:dev"
     },
     "devDependencies": {
         "@types/bun": "^1.3.13",

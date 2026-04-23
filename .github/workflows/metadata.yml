@@ -1,0 +1,53 @@
+name: Ensure metadata files
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ensure-metadata:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        working-directory: plugin
+        run: bun install --frozen-lockfile
+
+      - name: Generate metadata files
+        working-directory: plugin
+        run: |
+          bun run version:dev
+          bun run metadata:dev
+
+      - name: Commit metadata correction to main
+        run: |
+          if [[ ! -f manifest.json || ! -f versions.json ]]; then
+            echo "Could not generate manifest.json and versions.json in repository root"
+            exit 1
+          fi
+
+          if git diff --quiet -- manifest.json versions.json; then
+            echo "No metadata changes to commit"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add manifest.json versions.json
+          git commit -m "chore: sync metadata files [skip ci]"
+          git push origin HEAD:main

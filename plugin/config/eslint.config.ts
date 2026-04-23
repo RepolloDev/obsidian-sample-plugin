@@ -18,13 +18,5 @@ export default defineConfig(
         },
     },
     prettier,
-    globalIgnores([
-        'node_modules',
-        'dist',
-        'esbuild.config.mts',
-        'eslint.config.mts',
-        'prettier.config.mts',
-        'config.mts',
-        'utils/**/*.ts',
-    ])
+    globalIgnores(['node_modules', 'config/**/*.ts'])
 );

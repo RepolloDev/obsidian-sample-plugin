@@ -18,11 +18,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate tag commit belongs to dev branch
+      - name: Validate tag commit belongs to main branch
         run: |
-          git fetch origin dev
-          if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/dev"; then
-            echo "Tag ${GITHUB_REF_NAME} is not pointing to a commit in branch dev."
+          git fetch origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/main"; then
+            echo "Tag ${GITHUB_REF_NAME} is not pointing to a commit in branch main."
             exit 1
           fi
 
@@ -39,39 +39,11 @@ jobs:
 
       - name: Prepare release assets
         run: |
-          mkdir -p /tmp/release-assets/.github
-          mkdir -p /tmp/release-package/.github
+          mkdir -p /tmp/release-assets
 
           cp dist/main.js /tmp/release-assets/main.js
           cp dist/manifest.json /tmp/release-assets/manifest.json
           cp dist/versions.json /tmp/release-assets/versions.json
-          cp README.md /tmp/release-assets/README.md
-          cp -R .github/assets /tmp/release-assets/.github/assets
-
-          cp -R dist/. /tmp/release-package/
-          cp README.md /tmp/release-package/README.md
-          cp -R .github/assets /tmp/release-package/.github/assets
-          tar -czf /tmp/release-assets/plugin-build-${GITHUB_REF_NAME}.tar.gz -C /tmp/release-package .
-
-      - name: Publish build output to main branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mkdir -p /tmp/release-dist/.github
-          cp -R dist/. /tmp/release-dist/
-          cp README.md /tmp/release-dist/README.md
-          cp -R .github/assets /tmp/release-dist/.github/assets
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git checkout --orphan main-build
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -R /tmp/release-dist/. .
-
-          git add -A
-          git commit -m "build: release ${GITHUB_REF_NAME}"
-          git push --force origin main-build:main
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
