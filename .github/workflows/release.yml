@@ -83,5 +83,3 @@ jobs:
             /tmp/release-assets/main.js
             /tmp/release-assets/manifest.json
             /tmp/release-assets/versions.json
-            /tmp/release-assets/README.md
-            /tmp/release-assets/plugin-build-${{ github.ref_name }}.tar.gz
