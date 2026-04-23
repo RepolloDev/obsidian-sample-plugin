@@ -17,7 +17,7 @@
     },
     "scripts": {
         "typecheck": "tsc --noEmit --skipLibCheck",
-        "format": "prettier --config config/prettier.config.ts --write .",
+        "format": "prettier --config config/.prettierrc --write .",
         "lint": "eslint -c config/eslint.config.ts src/",
         "check": "bun run typecheck && bun run format && bun run lint",
         "version": "bun run config/commands/version.ts",
