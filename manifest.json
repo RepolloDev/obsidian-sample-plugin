@@ -1,7 +1,7 @@
 {
   "id": "obsidian-plugin",
   "name": "Obsidian Plugin",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A plugin for Obsidian",
   "author": "RepolloDev",
   "authorUrl": "https://github.com/RepolloDev",
