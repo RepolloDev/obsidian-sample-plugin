@@ -1,0 +1,54 @@
+{
+    "compilerOptions": {
+        // Environment setup & module format
+        "lib": ["ES2018", "DOM"],
+        "target": "es2018",
+        "module": "Preserve",
+        "moduleDetection": "force",
+        "jsx": "react-jsx",
+        "allowJs": true,
+        "types": ["node"],
+        "paths": {
+            "@/*": ["./src/*"],
+            "@plugin-utils/*": ["./utils/*"]
+        },
+
+        // Source maps / debugging
+        "inlineSources": true,
+        "inlineSourceMap": true,
+
+        // Bundler mode / emit control
+        "noEmit": true,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": true,
+
+        // Code generation helpers
+        "importHelpers": true,
+        "allowSyntheticDefaultImports": true,
+
+        // Strict type checking
+        "strict": true,
+        "strictNullChecks": true,
+        "strictBindCallApply": true,
+        "useUnknownInCatchVariables": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "noImplicitOverride": true,
+        "isolatedModules": true,
+
+        // Safety / correctness
+        "noUncheckedIndexedAccess": true,
+        "noFallthroughCasesInSwitch": true,
+
+        // Performance / compatibility
+        "skipLibCheck": true,
+
+        // Optional / code hygiene
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noPropertyAccessFromIndexSignature": false
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx", "*.mts", "utils/**/*.ts"]
+}

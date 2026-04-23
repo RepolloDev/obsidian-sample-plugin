@@ -1,0 +1,37 @@
+{
+    "name": "obsidian-plugin",
+    "description": "An Obsidian plugin",
+    "version": "1.0.0",
+    "author": {
+        "name": "RepolloDev",
+        "url": "https://github.com/RepolloDev"
+    },
+    "funding": "https://github.com/sponsors/RepolloDev",
+    "keywords": [],
+    "license": "MIT",
+    "type": "module",
+    "module": "src/main.ts",
+    "dependencies": {
+        "obsidian": "latest"
+    },
+    "scripts": {
+        "clean": "bun run utils/clean-dev.ts",
+        "version": "bun run utils/version-tracker.ts && git add versions.json manifest.json",
+        "typecheck": "tsc --noEmit --skipLibCheck",
+        "format": "prettier --write .",
+        "lint": "eslint src/",
+        "check": "bun run typecheck && bun run format && bun run lint",
+        "build": "bun run check && bun run utils/build-plugin.ts",
+        "dev": "bun run utils/build-plugin.ts --dev"
+    },
+    "devDependencies": {
+        "@types/node": "^25.5.2",
+        "@typescript-eslint/parser": "^8.58.0",
+        "esbuild": "^0.28.0",
+        "eslint": "^10.2.0",
+        "eslint-config-prettier": "^10.1.8",
+        "globals": "^17.4.0",
+        "prettier": "^3.8.1",
+        "typescript": "^5"
+    }
+}

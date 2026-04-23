@@ -1,0 +1,11 @@
+# Artifacts
+./main.js
+./styles.css
+./manifest.json
+./versions.json
+./data.json
+
+# dist
+dist/
+build/
+output/
